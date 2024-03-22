@@ -9,7 +9,7 @@
 
 console.log("Task_5 START");
 
-class Unit {
+class EnergyEater {
     constructor (name, powerConsumption) {
         this.name = name,
         this.powerConsumption = powerConsumption,
@@ -24,57 +24,62 @@ class Unit {
     }  
 }
 
-class Lamp extends Unit {
-    constructor (weight, color, name, powerConsumption){
-        super (name,powerConsumption),        
-        this.type = "lamp",
-        this.weight = weight,
+class Lights extends EnergyEater {
+    constructor (location, color, name, powerConsumption){
+        super (name, powerConsumption),        
+        this.type = "lights",
+        this.location = location,
         this.color = color
     }
     getInfo() {
-        console.log(`This is the ${this.color} ${this.type}. Weight: ${this.weight}g. Power consumption: ${this.powerConsumption}`);
+        console.log(`This is ${this.color} ${this.type}. Location: ${this.location}. Power consumption: ${this.powerConsumption}`);
     }
 }
 
-class Computer extends Unit {
+class Device extends EnergyEater {
     constructor (kind, brand, name, powerConsumption){
-        super (name,powerConsumption),
-        this.type = "computer",
+        super (name, powerConsumption),
+        this.type = "device",
         this.kind = kind,
         this.brand = brand
     }
     getInfo() {
-        console.log(`This is the ${this.brand} ${this.type}. Kind: ${this.kind}. Power consumption: ${this.powerConsumption}`);
+        console.log(`This is ${this.brand} ${this.kind}. Power consumption: ${this.powerConsumption}`);
     }
 }
 
 
-/* экземпляр лампы 1 */
-let bigLamp = new Lamp(1000,"white","bigLamp",60);
-console.log(bigLamp);
-console.log(bigLamp.getInfo());
+/* экземпляр освещения 1 */
+let upperLight = new Lights("overhead", "warm", "upperLight", 80);
+console.log(upperLight);
+console.log(upperLight.getInfo());
 
-/* экземпляр лампы 2 */
-let smallLamp = new Lamp(600,"black","smallLamp",40);
-console.log(smallLamp);
-console.log(smallLamp.getInfo());
+/* экземпляр освещения 2 */
+let floorLamp = new Lights("local", "warm", "floorLamp", 40);
+console.log(floorLamp);
+console.log(floorLamp.getInfo());
 
-/* проверяем, работает ли кнопка "вкл/выкл" */
-bigLamp.buttonPush();
-console.log(bigLamp.button);
-bigLamp.buttonPush();
-console.log(bigLamp.button);
+/* экземпляр устройства 1 */
+let computer = new Device("computer", "HP", "laptop HP", 100);
+console.log(computer);
+console.log(computer.getInfo());
+
+/* экземпляр устройства 2 */
+let vacuumCleaner = new Device("vacuum cleaner", "Bosh", "vacuum cleaner Bosh", 1000);
+console.log(vacuumCleaner);
+console.log(vacuumCleaner.getInfo());
 
 
-/* экземпляр компьютера 1 */
-let laptopHP = new Computer("laptop","HP","laptopHP",100);
-console.log(laptopHP);
-console.log(laptopHP.getInfo());
+/* включаем некоторые приборы */
+upperLight.buttonPush();
+vacuumCleaner.buttonPush();
 
-/* экземпляр компьютера 2 */
-let desktopMSI = new Computer("desktop","MSI","desktopMSI",200);
-console.log(desktopMSI);
-console.log(desktopMSI.getInfo());
+/* считаем общее потребление */
+const energyEatersArray = [upperLight, floorLamp, computer, vacuumCleaner];
+const commonPowerConsumption = energyEatersArray.reduce((accumulator, value) => {
+    return value.button == "off" ? accumulator : accumulator + value.powerConsumption    
+}, 0);
+console.log("Common power consumption is: " + commonPowerConsumption);
 
 
 console.log("Task_5 END");

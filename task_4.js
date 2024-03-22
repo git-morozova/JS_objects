@@ -30,10 +30,10 @@
 console.log("Task_4 START");
 
 
-function Unit(name,type,power) {
+function Unit(name,type,powerConsumption) {
     this.name = name,
     this.type = type,
-    this.power = power,
+    this.powerConsumption = powerConsumption,
     this.button = "off",
     this.buttonPush = function() {
         if (this.button == "on") {
@@ -59,30 +59,34 @@ function Computer(kind,brand) {
 const bigLamp = new Unit("bigLamp","lamp",60);
 bigLamp.prototype = new Lamp(1000,"white");
 console.log(bigLamp);
-console.log(bigLamp.prototype.color); //узнать свойство нового объекта
+console.log(bigLamp.prototype.color); //узнать свойство нового объекта можно так
 
 /* экземпляр лампы 2 */
 const smallLamp = new Unit("smallLamp","lamp",40);
 smallLamp.prototype = new Lamp(600,"black");
 console.log(smallLamp);
 
-/* проверяем, работает ли кнопка "вкл/выкл" */
-bigLamp.buttonPush();
-console.log(bigLamp.button);
-bigLamp.buttonPush();
-console.log(bigLamp.button);
-
-
 /* экземпляр компьютера 1 */
 const laptopHP = new Unit("laptopHP","computer",100);
 laptopHP.prototype = new Computer("laptop","HP");
 console.log(laptopHP);
-console.log(laptopHP.power); //узнать свойство нового объекта
 
 /* экземпляр компьютера 2 */
 const desktopMSI = new Unit("desktopMSI","computer",200);
 desktopMSI.prototype = new Computer("desktop","MSI");
 console.log(desktopMSI);
+
+
+/* включаем некоторые приборы */
+bigLamp.buttonPush();
+desktopMSI.buttonPush();
+
+/* считаем общее потребление */
+const unitArray = [bigLamp, smallLamp, laptopHP, desktopMSI];
+const sumPowerConsumption = unitArray.reduce((accumulator, value) => {
+    return value.button == "off" ? accumulator : accumulator + value.powerConsumption    
+}, 0);
+console.log("Common power consumption is: " + sumPowerConsumption);
 
 
 console.log("Task_4 END");
