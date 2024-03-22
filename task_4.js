@@ -68,16 +68,16 @@ console.log(smallLamp);
 
 /* проверяем, работает ли кнопка "вкл/выкл" */
 bigLamp.buttonPush();
-console.log(bigLamp);
+console.log(bigLamp.button);
 bigLamp.buttonPush();
-console.log(bigLamp);
+console.log(bigLamp.button);
 
 
 /* экземпляр компьютера 1 */
 const laptopHP = new Unit("laptopHP","computer",100);
 laptopHP.prototype = new Computer("laptop","HP");
 console.log(laptopHP);
-console.log(laptopHP.prototype.brand); //узнать свойство нового объекта
+console.log(laptopHP.power); //узнать свойство нового объекта
 
 /* экземпляр компьютера 2 */
 const desktopMSI = new Unit("desktopMSI","computer",200);
