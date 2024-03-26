@@ -30,61 +30,72 @@
 console.log("Task_4 START");
 
 
-function Unit(name,type,powerConsumption) {
+function EnergyEater (name, powerConsumption) {
     this.name = name,
-    this.type = type,
     this.powerConsumption = powerConsumption,
-    this.button = "off",
     this.buttonPush = function() {
         if (this.button == "on") {
             this.button = "off";
         } else {
-            this.button = "on";
+            this.button = "on"; // если свойства нет либо равно "off"
         }
     }  
 }
 
-function Lamp(weight,color) { 
-    this.weight = weight,
-    this.color = color
+function Lights (location, color, name, powerConsumption) {
+    this.name = name,
+    this.powerConsumption = powerConsumption,
+    this.type = "lights",
+    this.location = location,
+    this.color = color,
+    this.getInfo = function() {
+        console.log(`This is ${this.color} ${this.type}. Location: ${this.location}. Power consumption: ${this.powerConsumption}`);
+    }    
 }
+Lights.prototype = new EnergyEater();
 
-function Computer(kind,brand) {
+function Device (kind, brand, name, powerConsumption) {
+    this.name = name,
+    this.powerConsumption = powerConsumption,
+    this.type = "device",
     this.kind = kind,
-    this.brand = brand
+    this.brand = brand,
+    this.getInfo = function() {
+        console.log(`This is ${this.brand} ${this.kind}. Power consumption: ${this.powerConsumption}`);
+    }
 }
+Device.prototype = new EnergyEater();
 
 
-/* экземпляр лампы 1 */
-const bigLamp = new Unit("bigLamp","lamp",60);
-bigLamp.prototype = new Lamp(1000,"white");
-console.log(bigLamp);
-console.log(bigLamp.prototype.color); //узнать свойство нового объекта можно так
+/* экземпляр освещения 1 */
+const upperLight = new Lights("overhead", "warm", "upperLight", 80);
+console.log(upperLight);
+console.log(upperLight.getInfo());
 
-/* экземпляр лампы 2 */
-const smallLamp = new Unit("smallLamp","lamp",40);
-smallLamp.prototype = new Lamp(600,"black");
-console.log(smallLamp);
+/* экземпляр освещения 2 */
+const floorLamp = new Lights("local", "warm", "floorLamp", 40);
+console.log(floorLamp);
+console.log(floorLamp.getInfo());
 
-/* экземпляр компьютера 1 */
-const laptopHP = new Unit("laptopHP","computer",100);
-laptopHP.prototype = new Computer("laptop","HP");
-console.log(laptopHP);
+/* экземпляр устройства 1 */
+const computer = new Device("computer", "HP", "laptop HP", 100);
+console.log(computer);
+console.log(computer.getInfo());
 
-/* экземпляр компьютера 2 */
-const desktopMSI = new Unit("desktopMSI","computer",200);
-desktopMSI.prototype = new Computer("desktop","MSI");
-console.log(desktopMSI);
+/* экземпляр устройства 2 */
+const vacuumCleaner = new Device("vacuum cleaner", "Bosh", "vacuum cleaner Bosh", 1000);
+console.log(vacuumCleaner);
+console.log(vacuumCleaner.getInfo());
 
 
 /* включаем некоторые приборы */
-bigLamp.buttonPush();
-desktopMSI.buttonPush();
+upperLight.buttonPush();
+vacuumCleaner.buttonPush();
 
 /* считаем общее потребление */
-const unitArray = [bigLamp, smallLamp, laptopHP, desktopMSI];
-const sumPowerConsumption = unitArray.reduce((accumulator, value) => {
-    return value.button == "off" ? accumulator : accumulator + value.powerConsumption    
+const EnergyEaterArray = [upperLight, floorLamp, computer, vacuumCleaner];
+const sumPowerConsumption = EnergyEaterArray.reduce((accumulator, value) => {
+    return value.button !== "on" ? accumulator : accumulator + value.powerConsumption    
 }, 0);
 console.log("Common power consumption is: " + sumPowerConsumption);
 

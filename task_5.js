@@ -13,7 +13,7 @@ class EnergyEater {
     constructor (name, powerConsumption) {
         this.name = name,
         this.powerConsumption = powerConsumption,
-        this.button = "off"
+        this.button = "off" // тут просто off по умолчанию. В предыдущем таске другая логика, чтобы не плодить сущности (иначе в таске 4 свойства button появляются в двух местах для одного и того же объекта)
     }
     buttonPush() {
         if (this.button == "on") {
@@ -50,22 +50,22 @@ class Device extends EnergyEater {
 
 
 /* экземпляр освещения 1 */
-let upperLight = new Lights("overhead", "warm", "upperLight", 80);
+const upperLight = new Lights("overhead", "warm", "upperLight", 80);
 console.log(upperLight);
 console.log(upperLight.getInfo());
 
 /* экземпляр освещения 2 */
-let floorLamp = new Lights("local", "warm", "floorLamp", 40);
+const floorLamp = new Lights("local", "warm", "floorLamp", 40);
 console.log(floorLamp);
 console.log(floorLamp.getInfo());
 
 /* экземпляр устройства 1 */
-let computer = new Device("computer", "HP", "laptop HP", 100);
+const computer = new Device("computer", "HP", "laptop HP", 100);
 console.log(computer);
 console.log(computer.getInfo());
 
 /* экземпляр устройства 2 */
-let vacuumCleaner = new Device("vacuum cleaner", "Bosh", "vacuum cleaner Bosh", 1000);
+const vacuumCleaner = new Device("vacuum cleaner", "Bosh", "vacuum cleaner Bosh", 1000);
 console.log(vacuumCleaner);
 console.log(vacuumCleaner.getInfo());
 
