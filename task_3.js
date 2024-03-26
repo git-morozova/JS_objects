@@ -4,7 +4,10 @@
 
 console.log("Task_3 START");
 
-const emptyObj = Object.create(null);
-console.log(emptyObj);
+function createEmptyObj() {
+   return Object.create(null);
+}
+
+console.log(createEmptyObj());
 
 console.log("Task_3 END");

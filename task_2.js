@@ -8,17 +8,19 @@ console.log("Task_2 START");
 
 const myOwnProps = function (str, obj) {
     for (let key in obj) {
-        if (obj.hasOwnProperty(key) && str == key) {
-            console.log(1);
-            return 1;
+        if (str == key) {
+            return true;
         }
     }    
-    console.log(0);
-    return 0;
+    return false;
 }
 
 const myOwnObj = {a:1, b:2, c:3};
-const myOwnStr = "c"
+let myOwnStr = "c";
 myOwnProps(myOwnStr, myOwnObj);
 
+let myOwnStr2 = "d";
+myOwnProps(myOwnStr2, myOwnObj);
+
 console.log("Task_2 END");
+
